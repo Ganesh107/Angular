@@ -1,0 +1,20 @@
+<ng-container *ngIf="displayModal">
+    <div class="w-screen flex fixed top-0 items-end justify-end pr-[248px] p-3">
+        <div class="w-[400px] bg-opacity-50 z-50">
+            <div class="bg-slate-200 p-4 rounded-lg shadow-lg">
+                <div class="grid grid-cols-3 gap-4 w-full">
+                    <div class="flex justify-between" *ngFor="let option of checkBoxOptions">
+                        <span class="">{{option}}</span>
+                        <input type="checkbox" class="w-[17px]">
+                    </div>
+                </div>  
+                <div class="flex mt-2 gap-2">
+                    <button type="submit" class="bg-white border-2 border-green-400 p-0.5
+                     cursor-pointer">Apply</button>
+                     <button type="submit" class="bg-white border-2 border-red-400 p-0.5
+                     cursor-pointer">Reset</button>
+                </div>              
+            </div>
+        </div>
+    </div>
+</ng-container>

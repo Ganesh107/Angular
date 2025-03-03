@@ -1,0 +1,16 @@
+<div class="flex flex-row w-screen p-3 shadow-lg">
+    <table class="w-1/2">
+        <thead>
+            <th *ngFor="let col of filteredColumns">{{col}}</th>
+        </thead>    
+        <tbody>
+            <tr *ngFor="let data of gridList">
+                <td *ngFor="let col of propertyList">{{data[col]}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="mt-28 flex items-start -ml-4 cursor-pointer" (click)="openModal()">
+        <p class="rotate-90">COLUMNS</p>
+    </div>
+</div>
+<app-modal [checkBoxOptions]="columnList"></app-modal>
