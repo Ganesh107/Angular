@@ -1,7 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { filter, first } from 'rxjs';
-import { AppComponent } from '../../app.component';
-import { ModalComponent } from '../modal/modal.component';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-grid',
@@ -15,24 +12,24 @@ export class GridComponent implements OnInit{
   filteredColumns: string[] = [];
   columnFilter:any = {};
   colPropMapper: Map<string, string> = new Map();
-  @ViewChild(ModalComponent) modal!: ModalComponent; 
+  displayModal: boolean = false;
 
   ngOnInit(): void {
     this.constructColumnNameList();
     this.filterColumns();
   }
 
-  filterColumns(){
+  filterColumns(): void{
     this.filteredColumns = this.columnList.filter(x => {
       let prop: any = this.colPropMapper.get(x)
       if(this.columnFilter[prop]){
-        return true
+        return true;
       }
-      return false
+      return false;
     })
   }
 
-  constructColumnNameList(){
+  constructColumnNameList(): void{
     Object.keys(this.gridList.at(0) as any).forEach(x => {
       this.columnFilter[x] = true;
       this.propertyList.push(x);
@@ -47,6 +44,13 @@ export class GridComponent implements OnInit{
   }
 
   openModal(): void{
-    this.modal.showModal();
+    this.displayModal = !this.displayModal;
   }
+
+  closeModal(state: boolean): void{
+    if(state){
+      this.displayModal = false;
+    }
+  }
+  
 }

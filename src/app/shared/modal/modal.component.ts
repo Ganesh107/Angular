@@ -1,18 +1,19 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-modal',
   standalone: false,
-  templateUrl: './modal.component.html',
+  templateUrl: './modal.component.html'
 })
 export class ModalComponent implements OnInit {
-  displayModal: boolean = true;
   @Input() checkBoxOptions: string[] = [];
+  @Output() onModalClose: EventEmitter<boolean> = new EventEmitter<boolean>(false)
 
   ngOnInit(): void {
     //console.log(this.checkBoxOptions)
   }
-  showModal(){
-    this.displayModal = !this.displayModal;
+  
+  closeModal(): void{
+    this.onModalClose.emit(true)
   }
 }

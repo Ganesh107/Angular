@@ -13,4 +13,5 @@
         <p class="rotate-90">COLUMNS</p>
     </div>
 </div>
-<app-modal [checkBoxOptions]="columnList"></app-modal>
+<app-modal *ngIf="displayModal" [checkBoxOptions]="columnList" 
+(onModalClose)="closeModal($event)"></app-modal>
