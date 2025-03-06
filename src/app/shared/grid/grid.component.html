@@ -1,7 +1,7 @@
 <div class="flex flex-row w-screen p-3 shadow-lg">
-    <table class="w-1/2">
+    <table class="w-1/4">
         <thead>
-            <th *ngFor="let col of filteredColumns">{{col}}</th>
+            <th *ngFor="let col of columnList">{{col}}</th>
         </thead>    
         <tbody>
             <tr *ngFor="let data of gridList">
