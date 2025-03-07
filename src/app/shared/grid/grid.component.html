@@ -1,18 +1,23 @@
-<div class="flex flex-row min-w-screen p-3 shadow-lg">
-    <table class="w-1/4">
-        <thead>
-            <th *ngFor="let col of filteredColumns">{{col}}</th>
-        </thead>    
-        <tbody>
-            <tr *ngFor="let data of gridList">
-                <td *ngFor="let col of filteredProps">{{data[col]}}</td>
-            </tr>
-        </tbody>
-    </table>
-    <div class="mt-28 flex items-start -ml-4 cursor-pointer" (click)="openModal()">
+<div class="flex flex-row p-2 min-h-screen">
+    <div [ngClass]="filteredColumns.length > 0 ? '' : 'items-center justify-center'" 
+    class="flex flex-row overflow-y-scroll p-3 shadow-lg w-1/2 h-screen">
+        <table *ngIf="filteredColumns">
+            <thead>
+                <th *ngFor="let col of filteredColumns">{{col}}</th>
+            </thead>    
+            <tbody>
+                <tr *ngFor="let data of gridList">
+                    <td *ngFor="let col of filteredProps">{{data[col]}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <span *ngIf="filteredColumns.length == 0">No columns selected</span>
+    </div>
+    <div class="mt-10 flex items-start -ml-4 cursor-pointer" (click)="openModal()">
         <p class="rotate-90">COLUMNS</p>
     </div>
 </div>
+
 <app-modal *ngIf="displayModal" [checkBoxOptions]="columnList" (onModalClose)="closeModal($event)" 
 [checkBoxFilter]="columnFilter" (selectedCheckboxValues)="getFilteredValues($event)" 
 appAppClickOutsideDirective (clickOutside)="closeModal(true)"></app-modal>

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit{
   userList: any;
-  
   constructor(private http: HttpClient){}
 
   ngOnInit(): void {

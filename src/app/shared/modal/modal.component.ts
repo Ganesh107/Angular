@@ -28,5 +28,6 @@ export class ModalComponent implements OnInit {
 
   applyFilter(): void{
     this.selectedCheckboxValues.emit(this.checkBoxFilter);
+    this.onModalClose.emit(true)
   }
 }
