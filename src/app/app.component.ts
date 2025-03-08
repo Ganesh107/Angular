@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -9,11 +8,16 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class AppComponent implements OnInit{
   userList: any;
+  arrCount: Number = 0;
+  
   constructor(private http: HttpClient){}
 
   ngOnInit(): void {
     this.http.get('assets/mock.json').subscribe(
-      res => this.userList = res
+      (res: any) => {
+        this.userList = res;
+        this.arrCount = res.length;
+      }
     );
   }
   

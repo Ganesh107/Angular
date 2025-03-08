@@ -6,7 +6,9 @@ import { Component, Input, OnInit } from '@angular/core';
   templateUrl: './grid.component.html',
 })
 export class GridComponent implements OnInit{
-  @Input() gridList:any;
+  @Input() gridList: any;
+  @Input() gridCount: Number = 0;
+   
   columnList: string[] = [];
   propertyList: string[] = [];
   columnFilter:any = {};

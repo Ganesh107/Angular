@@ -1,22 +1,41 @@
-<div class="flex flex-row p-2 min-h-screen">
-    <div [ngClass]="filteredColumns.length > 0 ? '' : 'items-center justify-center'" 
-    class="flex flex-row overflow-y-scroll p-3 shadow-lg w-1/2 h-screen">
-        <table *ngIf="filteredColumns">
-            <thead>
-                <th *ngFor="let col of filteredColumns">{{col}}</th>
-            </thead>    
-            <tbody>
-                <tr *ngFor="let data of gridList">
-                    <td *ngFor="let col of filteredProps">{{data[col]}}</td>
-                </tr>
-            </tbody>
-        </table>
-        <span *ngIf="filteredColumns.length == 0">No columns selected</span>
-    </div>
-    <div class="mt-10 h-[60px] flex items-start -ml-4 cursor-pointer" (click)="openModal()">
-        <p class="rotate-90">COLUMNS</p>
-    </div>
-</div>
-
 <app-modal *ngIf="displayModal" [checkBoxOptions]="columnList" (onModalClose)="closeModal($event)" 
 [checkBoxFilter]="columnFilter" (selectedCheckboxValues)="getFilteredValues($event)"></app-modal>
+
+<div class="flex flex-col p-2 min-h-[500px] w-[820px] shadow-lg shadow-gray-700 rounded-md">
+    <div class="flex w-full justify-end" *ngIf="filteredColumns.length > 0">
+        <div class="flex gap-2 pr-2">
+            <input type="text" class="border-1 outline-1">
+            <button class="bg-green-300 p-0.5">search</button>
+        </div>
+    </div>
+    <div>
+        <div [ngClass]="filteredColumns.length > 0 ? 'overflow-y-auto' : 'items-center justify-center'" 
+            class="flex flex-row p-4 w-full items-start relative">
+            <div class="w-full max-h-[500px] overflow-auto" [ngClass]="filteredColumns.length > 0 ? 'border': ''">
+                <table *ngIf="filteredColumns" class="min-w-full border-collapse">
+                    <thead class="sticky top-0 bg-white z-10 shadow-md border-2">
+                        <tr>
+                            <th *ngFor="let col of filteredColumns">{{ col }}</th>
+                        </tr>
+                    </thead>    
+                    <tbody>
+                        <tr *ngFor="let data of gridList" class="odd:bg-gray-100">
+                            <td *ngFor="let col of filteredProps">{{ data[col] }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            @if (filteredColumns.length == 0) {
+                <span class="absolute top-[200px]">
+                    No columns selected
+                </span>
+            }
+            <div class="h-[60px] flex items-end justify-center cursor-pointer pl-3 w-[20px]" (click)="openModal()">
+                <p class="rotate-90">COLUMNS</p>
+            </div>
+        </div>
+    </div>
+    <div>
+        
+    </div>
+</div>
