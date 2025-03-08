@@ -13,11 +13,10 @@
         </table>
         <span *ngIf="filteredColumns.length == 0">No columns selected</span>
     </div>
-    <div class="mt-10 flex items-start -ml-4 cursor-pointer" (click)="openModal()">
+    <div class="mt-10 h-[60px] flex items-start -ml-4 cursor-pointer" (click)="openModal()">
         <p class="rotate-90">COLUMNS</p>
     </div>
 </div>
 
 <app-modal *ngIf="displayModal" [checkBoxOptions]="columnList" (onModalClose)="closeModal($event)" 
-[checkBoxFilter]="columnFilter" (selectedCheckboxValues)="getFilteredValues($event)" 
-appAppClickOutsideDirective (clickOutside)="closeModal(true)"></app-modal>
+[checkBoxFilter]="columnFilter" (selectedCheckboxValues)="getFilteredValues($event)"></app-modal>

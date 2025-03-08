@@ -1,7 +1,7 @@
 <ng-container>
-    <div class="w-screen flex fixed top-0 items-end justify-center pr-[400px] pt-3">
+    <div class="w-1/2 flex fixed top-0 items-end justify-end pt-3">
         <div class="w-[400px] bg-opacity-50 z-50">
-            <div class="bg-slate-200 p-4 rounded-lg shadow-lg">
+            <div class="bg-slate-200 p-4 rounded-lg shadow-lg" appAppClickOutsideDirective (clickOutside)="closeModal()">
                 <div class="grid grid-cols-3 gap-4 w-full">
                     <div class="flex justify-between" *ngFor="let option of checkBoxOptions">
                         <span class="">{{option}}</span>

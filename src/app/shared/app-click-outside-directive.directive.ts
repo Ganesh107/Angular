@@ -13,7 +13,6 @@ export class AppClickOutsideDirective {
   onClickOutside(event: Event): void{
     if(!this.ele.nativeElement.contains(event.target)){
       this.clickOutside.emit();
-      console.log('clicked outside')
     }
   }
 }
