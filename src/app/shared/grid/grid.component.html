@@ -36,7 +36,7 @@
         </div>
     </div>
     <div class="flex h-[40px] w-full items-start justify-center">
-        <app-pagination [totalPages]="pages" [currpage]="currPage"
+        <app-pagination *ngIf="filteredColumns.length > 0" [totalPages]="pages" [currpage]="currPage"
          [limit]="limit" (selectedPage)="filterDataBasedOnPage($event)">
         </app-pagination>
     </div>
