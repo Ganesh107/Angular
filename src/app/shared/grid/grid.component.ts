@@ -7,18 +7,24 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class GridComponent implements OnInit{
   @Input() gridList: any;
-  @Input() gridCount: Number = 0;
-   
+  @Input() gridCount: number = 0;
+
+  pages: number = 0;
+  limit: number = 10;
+  currPage: number = 1; // ((1 - 1) * 10, 10)...((10 - 1) * 10, 100) => ((currPage - 1) * limit, currPage * limit)
   columnList: string[] = [];
   propertyList: string[] = [];
   columnFilter:any = {};
   displayModal: boolean = false; 
   filteredColumns: string[] = [];
   filteredProps: string[] = [];
+  filteredGridData: any;
   colNameToPropMapper: Map<string, string> = new Map<string, string>();
 
   ngOnInit(): void {
     this.constructColumnNameList();
+    this.pages = Math.ceil(this.gridCount / this.limit);
+    this.filterDataBasedOnPage(1);
   }
 
   constructColumnNameList(): void{
@@ -50,6 +56,11 @@ export class GridComponent implements OnInit{
     this.columnFilter = objFilter;
     this.filteredColumns = this.columnList.filter(x => objFilter[x]);
     this.filteredProps = this.propertyList.filter(x => objFilter[this.colNameToPropMapper.get(x)!]);
+  }
+
+  filterDataBasedOnPage(pageNum: number): void{
+    this.filteredGridData = this.gridList.slice((pageNum - 1) * this.limit, pageNum * this.limit)
+    this.currPage = pageNum;
   }
 
 }

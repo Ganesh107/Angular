@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit{
   userList: any;
-  arrCount: Number = 0;
+  arrCount: number = 0;
   
   constructor(private http: HttpClient){}
 
