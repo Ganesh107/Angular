@@ -8,7 +8,6 @@ import { Component, Input, OnInit } from '@angular/core';
 export class GridComponent implements OnInit{
   @Input() gridList: any;
   @Input() gridCount: number = 0;
-
   pages: number = 0;
   limit: number = 10;
   currPage: number = 1; // ((1 - 1) * 10, 10)...((10 - 1) * 10, 100) => ((currPage - 1) * limit, currPage * limit)
