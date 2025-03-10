@@ -19,9 +19,11 @@
                         </tr>
                     </thead>    
                     <tbody>
-                        <tr *ngFor="let data of filteredGridData" class="odd:bg-gray-100">
-                            <td *ngFor="let col of filteredProps">{{ data[col] }}</td>
-                        </tr>
+                        <ng-container *ngIf="filteredGridData.length > 0; else noData">
+                            <tr *ngFor="let data of filteredGridData" class="odd:bg-gray-100">
+                                <td *ngFor="let col of filteredProps">{{ data[col] }}</td>
+                            </tr>
+                        </ng-container>
                     </tbody>
                 </table>
             </div>
@@ -41,3 +43,9 @@
         </app-pagination>
     </div>
 </div>
+
+<ng-template #noData>
+    <tr>
+        <td [attr.colspan]="filteredColumns.length" class="text-center py-4">No data available...</td>
+    </tr>
+</ng-template>
