@@ -4,6 +4,7 @@ import { GridComponent } from './grid/grid.component';
 import { ModalComponent } from './modal/modal.component';
 import { AppClickOutsideDirective } from './app-click-outside-directive.directive';
 import { PaginationComponent } from './pagination/pagination.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -13,8 +14,9 @@ import { PaginationComponent } from './pagination/pagination.component';
     PaginationComponent,
   ],
   imports: [
-    CommonModule
-],
+    CommonModule,
+    FormsModule
+  ],
   exports: [
     GridComponent
   ]
