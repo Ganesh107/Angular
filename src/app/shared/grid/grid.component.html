@@ -23,7 +23,13 @@
                     </thead>    
                     <tbody>
                         <ng-container *ngIf="filteredGridData.length > 0; else noData">
-                            <tr *ngFor="let data of filteredGridData" class="odd:bg-gray-100">
+                            <tr *ngFor="let data of filteredGridData; index as i" 
+                             draggable="true" 
+                             (dragstart)="OnDragStart($event, i)" 
+                             (dragover)="onDragOver($event)"
+                             (drop)="onDrop($event, i)"
+                             class="odd:bg-gray-100"
+                             >
                                 <td *ngFor="let col of filteredProps">{{ data[col] }}</td>
                             </tr>
                         </ng-container>

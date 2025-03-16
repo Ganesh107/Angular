@@ -24,6 +24,7 @@ export class GridComponent implements OnInit{
   filteredDataCopy: any;
   sortIcon: any;
   sortFilter: any = {};
+  sortFilterCopy: any = {};
 
   ngOnInit(): void {
     this.constructColumnNameList();
@@ -49,6 +50,7 @@ export class GridComponent implements OnInit{
     })
     this.filteredColumns = this.columnList;
     this.filteredProps = this.propertyList;
+    this.sortFilterCopy = JSON.parse(JSON.stringify(this.sortFilter));
   }
 
   openModal(): void{
@@ -72,6 +74,7 @@ export class GridComponent implements OnInit{
     this.filteredDataCopy = [...this.filteredGridData];
     this.currPage = pageNum;
     this.filterGridData(); //Apply search filter if search input is not empty
+    this.sortFilter = JSON.parse(JSON.stringify(this.sortFilterCopy)) // Reset sort filter
   }
 
   filterGridData(): void{
@@ -100,10 +103,21 @@ export class GridComponent implements OnInit{
     let newVal: number = this.sortFilter[colName].val + 1;
     this.sortFilter[colName].val = newVal;
 
-    // Set the sort icon
+    // Clear other columns
+    for(let key in this.sortFilter){
+      if(key != colName){
+        this.sortFilter[key] = {
+          val: 0,
+          icon: faSort
+        }
+      }
+    }
+
+    // Set the sort icon and sort the grid
     if(newVal % 3 == 0){
       this.sortFilter[colName].icon = faSort;
       this.filteredGridData = [...this.filteredDataCopy];
+      this.filterGridData();
     }
     else if(newVal % 3 == 1){
       this.sortFilter[colName].icon = faSortAsc;
@@ -113,7 +127,39 @@ export class GridComponent implements OnInit{
       this.sortFilter[colName].icon = faSortDesc;
       this.filteredGridData.sort((a: any, b: any) => b[propName].localeCompare(a[propName]));
     }
+  }
 
+  OnDragStart(event: DragEvent, idx: number): void {
+    event.dataTransfer?.setData("startIndex", idx.toString()); // Store starting index 
+  }
+  
+  onDragOver(event: Event): void {
+    event.preventDefault(); 
+  }
+  
+  onDrop(event: DragEvent, endIdx: number): void {
+    const startIdx = Number(event.dataTransfer?.getData("startIndex"));
+    if(startIdx !- endIdx){
+      this.reArrangeGridRows(startIdx, endIdx)
+    }
+  }
+
+  reArrangeGridRows(start: number, end: number): void{
+    const flag: boolean = start < end;
+    if(flag){
+      const ele: object = this.filteredGridData[start];
+      for(let i = start; i < end; i++){
+        this.filteredGridData[i] = this.filteredGridData[i + 1];
+      }
+      this.filteredGridData[end] = ele;
+    }
+    else{
+      const ele: object = this.filteredGridData[start];
+      for(let i = start; i > end; i--){
+        this.filteredGridData[i] = this.filteredGridData[i - 1];
+      }
+      this.filteredGridData[end] = ele;
+    }
   }
 
 }
