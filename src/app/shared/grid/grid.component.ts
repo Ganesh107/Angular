@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { faSort, faSortAsc, faSortDesc } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-grid',
@@ -21,6 +22,8 @@ export class GridComponent implements OnInit{
   colNameToPropMapper: Map<string, string> = new Map<string, string>();
   searchVal: string = '';
   filteredDataCopy: any;
+  sortIcon: any;
+  sortFilter: any = {};
 
   ngOnInit(): void {
     this.constructColumnNameList();
@@ -38,6 +41,11 @@ export class GridComponent implements OnInit{
       this.columnList.push(colName);
       this.columnFilter[colName] = true;
       this.colNameToPropMapper.set(x, colName);
+      this.colNameToPropMapper.set(colName, x);
+      this.sortFilter[colName] = {
+        val: 0,
+        icon: faSort
+      }
     })
     this.filteredColumns = this.columnList;
     this.filteredProps = this.propertyList;
@@ -61,12 +69,12 @@ export class GridComponent implements OnInit{
 
   filterDataBasedOnPage(pageNum: number): void{
     this.filteredGridData = this.gridList.slice((pageNum - 1) * this.limit, pageNum * this.limit);
-    this.filteredDataCopy = this.filteredGridData;
+    this.filteredDataCopy = [...this.filteredGridData];
     this.currPage = pageNum;
     this.filterGridData(); //Apply search filter if search input is not empty
   }
 
-  filterGridData(){
+  filterGridData(): void{
     if(this.searchVal.trim() != ""){
       const searchValLower = this.searchVal.trim().toLowerCase();
       this.filteredGridData = this.filteredDataCopy.filter((x: { first_name: string; last_name: string; 
@@ -83,8 +91,29 @@ export class GridComponent implements OnInit{
       );
     }
     else{
-      this.filteredGridData = this.filteredDataCopy;
+      this.filteredGridData = [...this.filteredDataCopy];
     }
+  }
+
+  sortGrid(colName: string): void{
+    let propName: any = this.colNameToPropMapper.get(colName);    
+    let newVal: number = this.sortFilter[colName].val + 1;
+    this.sortFilter[colName].val = newVal;
+
+    // Set the sort icon
+    if(newVal % 3 == 0){
+      this.sortFilter[colName].icon = faSort;
+      this.filteredGridData = [...this.filteredDataCopy];
+    }
+    else if(newVal % 3 == 1){
+      this.sortFilter[colName].icon = faSortAsc;
+      this.filteredGridData.sort((a: any, b: any) => a[propName].localeCompare(b[propName]));
+    }
+    else{
+      this.sortFilter[colName].icon = faSortDesc;
+      this.filteredGridData.sort((a: any, b: any) => b[propName].localeCompare(a[propName]));
+    }
+
   }
 
 }

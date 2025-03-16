@@ -17,7 +17,7 @@
                         <tr>
                             <th class="min-w-[130px]" *ngFor="let col of filteredColumns">
                                 {{ col }}
-                                <button class="text-blue-500 cursor-pointer">&#x25B2;</button>
+                                <fa-icon (click)="sortGrid(col)" [icon]="sortFilter[col].icon" class="cursor-pointer"></fa-icon>
                             </th>
                         </tr>
                     </thead>    

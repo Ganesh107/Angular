@@ -5,6 +5,7 @@ import { ModalComponent } from './modal/modal.component';
 import { AppClickOutsideDirective } from './app-click-outside-directive.directive';
 import { PaginationComponent } from './pagination/pagination.component';
 import { FormsModule } from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { FormsModule } from '@angular/forms';
   ],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    FontAwesomeModule
   ],
   exports: [
     GridComponent

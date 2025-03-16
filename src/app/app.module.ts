@@ -13,7 +13,7 @@ import { provideHttpClient } from '@angular/common/http';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    SharedModule
+    SharedModule,
 ],
   providers: [provideHttpClient()],
   bootstrap: [AppComponent]
