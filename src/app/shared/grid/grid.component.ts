@@ -161,5 +161,4 @@ export class GridComponent implements OnInit{
       this.filteredGridData[end] = ele;
     }
   }
-
 }
