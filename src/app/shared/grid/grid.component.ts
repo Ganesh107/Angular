@@ -1,10 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { faSort, faSortAsc, faSortDesc } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-grid',
   standalone: false,
-  templateUrl: './grid.component.html',
+  templateUrl: './grid.component.html'
 })
 export class GridComponent implements OnInit{
   @Input() gridList: any;
