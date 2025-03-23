@@ -3,7 +3,8 @@ import { ChangeDetectionStrategy, Component, DoCheck, EventEmitter, Input, OnIni
 @Component({
   selector: 'app-pagination',
   standalone: false,
-  templateUrl: './pagination.component.html'
+  templateUrl: './pagination.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PaginationComponent implements OnInit, DoCheck {
   @Input() totalPages: number = 0;
@@ -21,7 +22,6 @@ export class PaginationComponent implements OnInit, DoCheck {
 
   ngOnInit(): void {
     this.visiblePages = Array.from({length: this.limit}, (_, i) => this.currpage + i);
-    console.log('re')
   }
 
   setPage(pageNumber: number){
