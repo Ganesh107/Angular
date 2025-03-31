@@ -139,7 +139,7 @@ export class GridComponent implements OnInit{
   
   onDrop(event: DragEvent, endIdx: number): void {
     const startIdx = Number(event.dataTransfer?.getData("startIndex"));
-    if(startIdx !- endIdx){
+    if(startIdx !== endIdx){
       this.reArrangeGridRows(startIdx, endIdx)
     }
   }
