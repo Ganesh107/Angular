@@ -9,7 +9,7 @@ export class LoginComponent {
   login(){
     localStorage.setItem("accessToken", "wYsjmsIKS12#12s");
   }
-
+  
   logout(){
     localStorage.removeItem("accessToken");
   }
