@@ -7,7 +7,6 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ContactComponent implements OnInit {
   @Input() inputValue: string = "";
-
   private debouncedApiRequest!: (...args: any[]) => void;
 
   ngOnInit() {
