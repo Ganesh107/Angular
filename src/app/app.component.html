@@ -1,3 +1,5 @@
 <!-- <app-grid *ngIf="userList" [gridList]="userList" [gridCount]="arrCount"></app-grid>  -->
 <app-navbar></app-navbar>
 <router-outlet></router-outlet>
+<p>{{sharedService.sharedValExposed | async}}</p>
+<button (click)="next()">next</button>

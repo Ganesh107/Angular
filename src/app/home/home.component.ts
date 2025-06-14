@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { SharedService } from '../shared.service';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +8,8 @@ import { Component } from '@angular/core';
   templateUrl: './home.component.html',
 })
 export class HomeComponent {
+  sharedService = inject(SharedService)
+  
   constructor(private http: HttpClient){}
   sendRequest(){
     this.http.get('http://test.com').subscribe(
