@@ -5,8 +5,8 @@ import { BehaviorSubject } from "rxjs";
     providedIn: 'root'
 })
 export class SharedService{
-    sharedVal = new BehaviorSubject(0)
-    sharedValExposed = this.sharedVal.asObservable()
+    private sharedVal = new BehaviorSubject(0)
+    readonly sharedValExposed = this.sharedVal.asObservable()
     updateVal(newVal: number): void{
         this.sharedVal.next(newVal)
     }
