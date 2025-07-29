@@ -1,1 +1,23 @@
-<p>form works!</p>
+<form [formGroup]="myform">
+    <label for="name">Name:</label>
+    <input type="text" formControlName="name"/>
+    <div *ngIf="myform.get('name')?.invalid && myform.get('name')?.touched">
+      Name is required.
+    </div>
+
+    <label for="email">Email:</label>
+    <input type="email" formControlName="email"/>
+    <div *ngIf="myform.get('email')?.invalid && myform.get('email')?.touched">
+      Valid email is required.
+    </div>
+
+    <div formArrayName="skills">
+        <div *ngFor="let skill of skills.controls; let i = index">
+            <input [formControlName]="i" placeholder="Skill {{i + 1}}"/>
+        </div>
+    </div>
+    
+    <button (click)="addSkill()">Add Skill</button>
+    <br><br>
+    <button type="submit" (click)="onSubmit()" [disabled]="myform.invalid">Submit</button>
+</form>
